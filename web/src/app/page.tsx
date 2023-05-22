@@ -9,9 +9,9 @@ export default function Home() {
       {/* Left */}
       <div className="flex flex-col items-start justify-between overflow-hidden border-r border-white/10 bg-[url(../assets/bg-stars.svg)] bg-cover px-28 py-16">
         {/* Blur */}
-        <div className="blur-full absolute right-0 top-1/2 h-[288px] w-[526] -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-700 opacity-50" />
+        <div className="absolute right-0 top-1/2 h-[288px] w-[526px] -translate-y-1/2 translate-x-1/2 rounded-full bg-purple-700 opacity-50 blur-full" />
         {/* Stripes */}
-        <div className="bg-stripes absolute bottom-0 right-2 top-0 w-2"></div>
+        <div className="absolute bottom-0 right-2 top-0 w-2 bg-stripes"></div>
         {/* Sign in */}
         <a
           href=""
@@ -67,3 +67,43 @@ export default function Home() {
     </main>
   )
 }
+        <div className="absolute bottom-0 right-2 top-0 w-2 bg-stripes"></div>
+
+
+        INICIO principal
+        var opcao_selecionada: STRING
+        var valor: INTEIRO
+        var saldo: INTEIRO
+        var encerrar_programa: BOO
+       
+        DEFINIR encerrar_programa -> falso
+       
+        ENQUANTO encerrar_programa IGUAL_A falso
+         CHAMAR MOSTRAR_MENU -> opcao_selecionada
+        SE opcao_selecionada IGUAL_A a 
+         MOSTRAR "Seu saçdp é: ", saldo
+        OU_SE opcao_selecionada IGUAL_A b 
+         MOSTRAR "Digite o valor a depositar: "
+         ESPERAR_DIGITACAO -> valor
+         SOMAR valor, saldo -> saldo
+         MOSTRAR "Deposito efetuado"
+        OU_SE opcao_selecionada IGUAL_A c 
+         MOSTRAR "Digite valor a retirar: "
+         ESPERAR_DIGITACAO -> valor
+         SE valor MARIOR_QUE saldo
+          MOSTRAR "Saque não permitido, saldo insuficiente"
+         SENAO 
+          SUBTRAIR valor, saldo -> saldo
+        FIM SE
+        MOSTRAR "Saque efetuado"
+        OU_SE opcao_selecionada -> encerrar_programa
+         DEFINIR verdadeiro -> encerrar_programa
+         SENAO
+         MOSTRAR "Opcao invalida, tente novamente"
+         FIM SE
+
+
+        MOSTRAR "Saque efetuado"
+
+
+

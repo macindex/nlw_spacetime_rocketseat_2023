@@ -13,10 +13,6 @@ app.get('/users', async () => {
     return users
 })
 
-// app.get('/hello', () => {
-//     return 'Helo world!'
-// })
-
 app.listen({
     port: 3333,
 }).then(()=>{

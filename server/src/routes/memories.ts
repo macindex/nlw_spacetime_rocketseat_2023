@@ -19,8 +19,6 @@ export async function memoriesRoutes(app: FastifyInstance) {
     
     })
     app.get('/memories/:id', async (req) => {
-        
-
         const paramsSchema = z.object({
             id: z.string().uuid(),
         })
@@ -33,21 +31,59 @@ export async function memoriesRoutes(app: FastifyInstance) {
         })
         return memory
     })
-    app.post('/memories', async () => {
-        const users = await prisma.user.findMany({
-            
+    app.post('/memories', async (req) => {
+        const bodySchema = z.object({
+            content: z.string(),
+            coverUrl: z.string(),
+            isPublic: z.coerce.boolean().default(false),
         })
+        const { content, isPublic, coverUrl } = bodySchema.parse(req.body)
 
-    })
-    app.put('/memories/:id', async () => {
-        const users = await prisma.user.findMany({
-            
+        const memory = await prisma.memory.create({
+            data: {
+                content,
+                coverUrl,
+                isPublic,
+                userId: '',
+            }
         })
-    
+        return memory        
     })
-    app.delete('/memories/:id', async () => {
-        const users = await prisma.user.findMany({
-            
+
+    app.put('/memories', async (req) => {
+        const paramsSchema = z.object({
+            id: z.string().uuid(),
+        })
+        const { id } = paramsSchema.parse(req.params)
+
+        const bodySchema = z.object({
+            content: z.string(),
+            coverUrl: z.string(),
+            isPublic: z.coerce.boolean().default(false),
+        })
+        const { content, isPublic, coverUrl } = bodySchema.parse(req.body)
+
+        await prisma.memory.update({
+          where: {
+            id,
+          },
+          data: {
+            content,
+            coverUrl,
+            isPublic,
+          }  
+        })
+    })
+    app.delete('/memories/:id', async (req) => {
+        const paramsSchema = z.object({
+            id: z.string().uuid(),
+        })
+        const { id } = paramsSchema.parse(req.params)
+
+        await prisma.memory.delete({
+            where: {
+                id,
+            }
         })
     
     })

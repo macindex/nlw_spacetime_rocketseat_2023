@@ -1,7 +1,13 @@
 import fastify from 'fastify'
+import cors from '@fastify/cors'
 import { memoriesRoutes } from './routes/memories'
 
 const app = fastify()
+
+app.register(cors, {
+    // origin: ['http://localhost:3000', 'http://localhost:3000'], //All url's from Frontend can access the backend
+    origin: true,
+})
 
 app.register(memoriesRoutes)
 
